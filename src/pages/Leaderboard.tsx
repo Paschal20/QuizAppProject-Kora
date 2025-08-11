@@ -36,11 +36,26 @@ const Leaderboard: React.FC = () => {
     }
   };
 
+  const handleDeleteUser = (index: number) => {
+    const entryToDelete = filteredAndSortedLeaderboard[index];
+    if (window.confirm(`Are you sure you want to delete ${entryToDelete.name} with score ${entryToDelete.score}/5?`)) {
+      const updatedLeaderboard = leaderboard.filter(
+        entry => !(entry.name === entryToDelete.name && entry.score === entryToDelete.score && entry.date === entryToDelete.date)
+      );
+      localStorage.setItem('leaderboard', JSON.stringify(updatedLeaderboard));
+      setLeaderboard(updatedLeaderboard);
+    }
+  };
+
   // Filter and sort the leaderboard
   const filteredAndSortedLeaderboard = leaderboard
-    .filter(entry => 
-      entry.name.toLowerCase().includes(searchTerm.toLowerCase())
-    )
+    .filter(entry => {
+      const nameMatch = entry.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const scoreMatch = searchTerm === '' || 
+        entry.score.toString().includes(searchTerm) || 
+        searchTerm === entry.score.toString();
+      return nameMatch || scoreMatch;
+    })
     .sort((a, b) => {
       if (sortOrder === 'highest') {
         return b.score - a.score;
@@ -153,13 +168,16 @@ const Leaderboard: React.FC = () => {
                     <th className="border border-gray-300 px-6 py-3 text-left text-gray-700 font-semibold">
                       Date
                     </th>
+                    <th className="border border-gray-300 px-6 py-3 text-left text-gray-700 font-semibold">
+                      Actions
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {filteredAndSortedLeaderboard.length === 0 ? (
                     <tr>
                       <td
-                        colSpan={4}
+                        colSpan={5}
                         className="border border-gray-300 px-6 py-8 text-center text-gray-500"
                       >
                         No players found matching "{searchTerm}"
@@ -182,10 +200,18 @@ const Leaderboard: React.FC = () => {
                           {entry.name}
                         </td>
                         <td className="border border-gray-300 px-6 py-3">
-                          {entry.score}/5
+                          {entry.score}/9
                         </td>
                         <td className="border border-gray-300 px-6 py-3">
                           {new Date(entry.date).toLocaleDateString()}
+                        </td>
+                        <td className="border border-gray-300 px-6 py-3">
+                          <button
+                            onClick={() => handleDeleteUser(index)}
+                            className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded transition-colors duration-200"
+                          >
+                            Delete
+                          </button>
                         </td>
                       </tr>
                     ))
