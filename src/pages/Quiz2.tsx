@@ -47,7 +47,7 @@ const Quiz2: React.FC = () => {
       id: 3,
       question: "How do you create a new React app?",
       options: ["npm create myApp.", "react start project", "npm create vite@latest", "react start project"],
-      correctAnswer: 1,
+      correctAnswer: 2,
     },
     {
       id: 4,
@@ -136,7 +136,7 @@ const Quiz2: React.FC = () => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [timeLeft, quizStarted, quizFinished]);
+  }, [timeLeft, quizStarted, quizFinished,]);
 
   const handleAnswerSelect = (answerIndex: number) => {
     setSelectedAnswer(answerIndex);
