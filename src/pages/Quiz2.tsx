@@ -45,21 +45,31 @@ const Quiz2: React.FC = () => {
     },
     {
       id: 3,
-      question: "What is 2 + 2?",
-      options: ["3", "4", "5", "6"],
+      question: "How do you create a new React app?",
+      options: ["npm create myApp.", "react start project", "npm create vite@latest", "react start project"],
       correctAnswer: 1,
     },
     {
       id: 4,
-      question: "Who painted the Mona Lisa?",
-      options: ["Van Gogh.", "Picasso.", "Leonardo da Vinci.", "Rembrandt."],
+      question: "What is props in React?",
+      options: [
+        "Database entries.",
+        "A function hook.",
+        "Data passed from one component to another.",
+        "CSS styles.",
+      ],
       correctAnswer: 2,
     },
     {
       id: 5,
-      question: "What is the largest ocean on Earth?",
-      options: ["Atlantic.", "Indian.", "Arctic.", "Pacific."],
-      correctAnswer: 3,
+      question: "Difference between props and state?",
+      options: [
+        "Props change over time; state is fixed.",
+        " Props are read-only, state can change.",
+        "Both are the same.",
+        "Props store HTML.",
+      ],
+      correctAnswer: 1,
     },
     {
       id: 6,
