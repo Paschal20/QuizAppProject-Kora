@@ -16,6 +16,7 @@ interface LeaderboardEntry {
 
 const Quiz2: React.FC = () => {
   const navigate = useNavigate();
+
   const [playerName, setPlayerName] = useState<string>("");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -24,7 +25,6 @@ const Quiz2: React.FC = () => {
   const [quizFinished, setQuizFinished] = useState(false);
   const [quizStarted, setQuizStarted] = useState(false);
 
-  // Sample questions
   const questions: Question[] = [
     {
       id: 1,
@@ -46,7 +46,12 @@ const Quiz2: React.FC = () => {
     {
       id: 3,
       question: "How do you create a new React app?",
-      options: ["npm create myApp.", "react start project", "npm create vite@latest", "react start project"],
+      options: [
+        "npm create myApp.",
+        "react start project",
+        "npm create vite@latest",
+        "react start project",
+      ],
       correctAnswer: 2,
     },
     {
@@ -110,7 +115,6 @@ const Quiz2: React.FC = () => {
     },
   ];
 
-  // Check if player name exists
   useEffect(() => {
     const name = localStorage.getItem("playerName");
     if (!name) {
@@ -121,7 +125,41 @@ const Quiz2: React.FC = () => {
     }
   }, [navigate]);
 
-  // Timer logic
+  const handleNextQuestion = useCallback(() => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+      setTimeLeft(10);
+      setSelectedAnswer(null);
+    } else {
+      setQuizFinished(true);
+
+      const leaderboardEntry: LeaderboardEntry = {
+        name: playerName,
+        score: score,
+        date: new Date().toISOString(),
+      };
+
+      const existingLeaderboard = localStorage.getItem("leaderboard");
+      let leaderboard: LeaderboardEntry[] = [];
+
+      if (existingLeaderboard) {
+        leaderboard = JSON.parse(existingLeaderboard);
+      }
+
+      leaderboard.push(leaderboardEntry);
+
+      leaderboard.sort((a, b) => b.score - a.score);
+      leaderboard = leaderboard.slice(0, 10);
+
+      localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+
+      setTimeout(() => {
+        navigate("/leaderboard");
+      }, 2000);
+    }
+  }, [currentQuestionIndex, questions.length, playerName, score, navigate]);
+
+  // Updated useEffect with handleNextQuestion in dependencies
   useEffect(() => {
     if (!quizStarted || quizFinished || timeLeft === 0) return;
 
@@ -136,7 +174,7 @@ const Quiz2: React.FC = () => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [timeLeft, quizStarted, quizFinished,]);
+  }, [timeLeft, quizStarted, quizFinished, handleNextQuestion]);
 
   const handleAnswerSelect = (answerIndex: number) => {
     setSelectedAnswer(answerIndex);
@@ -145,47 +183,6 @@ const Quiz2: React.FC = () => {
     if (answerIndex === questions[currentQuestionIndex].correctAnswer) {
       setScore((prevScore) => prevScore + 1);
     }
-  };
-
-  const handleNextQuestion = useCallback(() => {
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-      setTimeLeft(10);
-      setSelectedAnswer(null);
-    } else {
-      finishQuiz();
-    }
-  }, [currentQuestionIndex, questions.length]);
-
-  const finishQuiz = () => {
-    setQuizFinished(true);
-
-    // Save to leaderboard
-    const leaderboardEntry: LeaderboardEntry = {
-      name: playerName,
-      score: score,
-      date: new Date().toISOString(),
-    };
-
-    const existingLeaderboard = localStorage.getItem("leaderboard");
-    let leaderboard: LeaderboardEntry[] = [];
-
-    if (existingLeaderboard) {
-      leaderboard = JSON.parse(existingLeaderboard);
-    }
-
-    leaderboard.push(leaderboardEntry);
-
-    // Sort by score (descending) and keep top 10
-    leaderboard.sort((a, b) => b.score - a.score);
-    leaderboard = leaderboard.slice(0, 10);
-
-    localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
-
-    // Navigate to leaderboard after a short delay
-    setTimeout(() => {
-      navigate("/leaderboard");
-    }, 2000);
   };
 
   if (!quizStarted) {
