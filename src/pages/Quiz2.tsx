@@ -198,7 +198,7 @@ const Quiz2: React.FC = () => {
 
   if (quizFinished) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-700 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-blue-400 flex items-center justify-center p-4">
         <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-12 max-w-lg w-full text-center">
           <h2 className="text-3xl font-bold mb-4 text-gray-800">
             Quiz Completed!
@@ -220,7 +220,7 @@ const Quiz2: React.FC = () => {
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-700 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-blue-400 flex items-center justify-center p-4">
       <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-12 max-w-3xl w-full">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-gray-800">
@@ -286,7 +286,7 @@ const Quiz2: React.FC = () => {
 
         {selectedAnswer !== null && (
           <button
-            className="next-btn bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-300"
+            className="next-btn bg-blue-400 text-white font-bold py-3 px-6 rounded-lg  transition-colors duration-300"
             onClick={handleNextQuestion}
           >
             {currentQuestionIndex < questions.length - 1

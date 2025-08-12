@@ -19,7 +19,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-700 flex items-center justify-center p-4">
+    <div className="min-h-screen   bg-blue-600 flex items-center justify-center p-4">
       <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-12 max-w-md w-full">
         <div className="text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
@@ -32,7 +32,7 @@ const Home: React.FC = () => {
           {!showForm ? (
             <button 
               onClick={handleStartQuiz}
-              className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold py-4 px-8 rounded-full text-lg hover:from-purple-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="w-full bg-gray-500 text-white font-bold py-4 px-8 rounded-full text-lg hover:from-purple-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               Start Quiz
             </button>
@@ -52,14 +52,14 @@ const Home: React.FC = () => {
               <div className="flex gap-4">
                 <button 
                   type="submit"
-                  className="flex-1 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold py-3 px-6 rounded-xl hover:from-green-600 hover:to-emerald-700 transition-all duration-300"
+                  className="flex-1 bg-blue-400 text-white font-bold py-3 px-6 rounded-xl  transition-all duration-300"
                 >
                   Begin Quiz
                 </button>
                 <button 
                   type="button"
                   onClick={() => setShowForm(false)}
-                  className="flex-1 bg-gradient-to-r from-red-500 to-pink-600 text-white font-bold py-3 px-6 rounded-xl hover:from-red-600 hover:to-pink-700 transition-all duration-300"
+                  className="flex-1 bg-red-400 text-white font-bold py-3 px-6 rounded-xl  transition-all duration-300"
                 >
                   Cancel
                 </button>

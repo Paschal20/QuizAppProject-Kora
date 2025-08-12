@@ -66,7 +66,7 @@ const Leaderboard: React.FC = () => {
     });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-700 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-blue-400 flex items-center justify-center p-4">
       <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-12 max-w-4xl w-full">
         <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center">
           Quiz Leaderboard
@@ -79,7 +79,7 @@ const Leaderboard: React.FC = () => {
             </p>
             <button
               onClick={handlePlayAgain}
-              className="bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold py-3 px-8 rounded-full text-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 shadow-lg"
+              className="bg-amber-300 text-white font-bold py-3 px-8 rounded-full text-lg  transition-all duration-300 shadow-lg"
             >
               Take Quiz
             </button>
@@ -115,7 +115,7 @@ const Leaderboard: React.FC = () => {
                       onClick={() => setSortOrder("highest")}
                       className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                         sortOrder === "highest"
-                          ? "bg-purple-600 text-white"
+                          ? "bg-blue-400 text-white"
                           : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                       }`}
                     >
@@ -125,7 +125,7 @@ const Leaderboard: React.FC = () => {
                       onClick={() => setSortOrder("lowest")}
                       className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                         sortOrder === "lowest"
-                          ? "bg-purple-600 text-white"
+                          ? "bg-blue-400 text-white"
                           : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                       }`}
                     >
@@ -208,7 +208,7 @@ const Leaderboard: React.FC = () => {
                         <td className="border border-gray-300 px-6 py-3">
                           <button
                             onClick={() => handleDeleteUser(index)}
-                            className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded transition-colors duration-200"
+                            className="bg-red-200 hover:bg-red-600 text-white font-bold py-1 px-3 rounded transition-colors duration-200"
                           >
                             Delete
                           </button>
@@ -223,19 +223,19 @@ const Leaderboard: React.FC = () => {
             <div className="flex justify-center gap-4 flex-wrap">
               <button
                 onClick={handleGoHome}
-                className="bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold py-3 px-8 rounded-full text-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 shadow-lg"
+                className=" text-white font-bold py-3 px-8 rounded-full text-lg bg-blue-400 transition-all duration-300 shadow-lg"
               >
                 Back to Home
               </button>
               <button
                 onClick={handlePlayAgain}
-                className="bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold py-3 px-8 rounded-full text-lg hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg"
+                className=" text-white font-bold py-3 px-8 rounded-full text-lg bg-green-500 transition-all duration-300 shadow-lg"
               >
                 Play Again
               </button>
               <button
                 onClick={handleReset}
-                className="bg-gradient-to-r from-red-500 to-red-600 text-white font-bold py-3 px-8 rounded-full text-lg hover:from-red-600 hover:to-red-700 transition-all duration-300 shadow-lg"
+                className=" text-white font-bold py-3 px-8 rounded-full text-lg bg-blue-400 transition-all duration-300 shadow-lg"
               >
                 Reset Leaderboard
               </button>
